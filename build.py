@@ -21,7 +21,7 @@ def build(dataset_name, repo, limit=None):
         dataset_name=dataset_name,
         split=split,
         instance_ids=instance_ids,
-        max_workers=32,
+        max_workers=64,
         force_rebuild=False,
         open_file_limit=8192,
     )
