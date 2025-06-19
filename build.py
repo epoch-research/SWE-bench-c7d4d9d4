@@ -1,9 +1,6 @@
 from swebench.harness import prepare_images
 import datasets
 
-# set root logger level to INFO
-import logging
-logging.basicConfig(level=logging.INFO)
 
 def build(dataset_name, repo, limit=None):
     dataset = datasets.load_dataset(dataset_name)
