@@ -56,8 +56,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Run build script
         run: python build.py --repo "${{ matrix.repo }}"
+      - name: Create sanitized repo name
+        run: echo "SANITIZED_REPO=$(echo '${{ matrix.repo }}' | tr '/' '-')" >> $GITHUB_ENV
       - name: Store Docker build logs as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-logs-${{ inputs.architecture }}-${{ github.run_number }}
+          name: build-logs-${{ inputs.architecture }}-${{ env.SANITIZED_REPO }}
           path: logs
