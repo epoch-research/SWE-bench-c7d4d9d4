@@ -311,8 +311,7 @@ def make_test_spec(instance: SWEbenchInstance) -> TestSpec:
         instance, specs, env_name, repo_directory, base_commit, test_patch
     )
     if platform.machine() in {"aarch64", "arm64"}:
-        # use arm64 unless explicitly specified
-        arch = "arm64" if instance_id not in USE_X86 else "x86_64"
+        arch = "arm64"
     else:
         arch = "x86_64"
 
