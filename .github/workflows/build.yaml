@@ -17,6 +17,21 @@ jobs:
   build:
     # The script will detect the architecture and build the images for that architecture
     runs-on: epoch-research-${{ inputs.architecture }}-64core-256GB-2040GB
+    strategy:
+      matrix:
+        repo:
+          - 'astropy/astropy'
+          - 'django/django'
+          - 'matplotlib/matplotlib'
+          - 'mwaskom/seaborn'
+          - 'pallets/flask'
+          - 'psf/requests'
+          - 'pydata/xarray'
+          - 'pylint-dev/pylint'
+          - 'pytest-dev/pytest'
+          - 'scikit-learn/scikit-learn'
+          - 'sphinx-doc/sphinx'
+          - 'sympy/sympy'
     defaults:
       run:
         shell: bash -l {0}
@@ -39,9 +54,9 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Run build script
-        run: python build.py
+        run: python build.py --repo "${{ matrix.repo }}"
       - name: Store Docker build logs as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-logs-${{ inputs.architecture }}
+          name: build-logs-${{ inputs.architecture }}-${{ matrix.repo }}-${{ github.run_number }}
           path: logs

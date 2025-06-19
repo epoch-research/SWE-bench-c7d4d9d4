@@ -1,5 +1,6 @@
 from swebench.harness import prepare_images
 import datasets
+import argparse
 
 
 def build(dataset_name, repo, limit=None):
@@ -15,7 +16,7 @@ def build(dataset_name, repo, limit=None):
     if limit:
         instance_ids = instance_ids[:limit]
 
-    print(f"Building images for {len(instance_ids)} instances")
+    print(f"Building images for {len(instance_ids)} instances for repo: {repo or 'all repos'}")
 
     prepare_images.main(
         dataset_name=dataset_name,
@@ -28,6 +29,11 @@ def build(dataset_name, repo, limit=None):
 
 
 if __name__ == '__main__':
-    dataset_name = 'princeton-nlp/SWE-bench'
-    repo: str | None = None
-    build(dataset_name, repo)
+    parser = argparse.ArgumentParser(description='Build SWE-bench images')
+    parser.add_argument('--repo', type=str, help='Repository to build images for (e.g., astropy/astropy)')
+    parser.add_argument('--dataset', type=str, default='princeton-nlp/SWE-bench', help='Dataset name')
+    parser.add_argument('--limit', type=int, help='Limit number of instances to build')
+    
+    args = parser.parse_args()
+    
+    build(args.dataset, args.repo, args.limit)
