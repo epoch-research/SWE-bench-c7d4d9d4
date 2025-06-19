@@ -1,0 +1,47 @@
+name: Build images
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      architecture:
+        description: 'CPU architecture (x64 or arm64)'
+        required: true
+        type: choice
+        options:
+          - x64
+          - arm64
+jobs:
+  build:
+    # The script will detect the architecture and build the images for that architecture
+    runs-on: epoch-research-${{ inputs.architecture }}-32core-128GB-1200GB
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+      - name: Install dependencies
+        run: |
+            uv pip install --python ${Python_ROOT_DIR} '.'
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run build script
+        run: python build.py
+      - name: Store Docker build logs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs-${{ inputs.architecture }}
+          path: logs
