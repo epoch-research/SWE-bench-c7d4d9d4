@@ -61,7 +61,7 @@ class TestSpec:
 
     @property
     def base_image_key(self):
-        return f"sweb.base.{self.arch}:latest"
+        return f"ghcr.io/epoch-research/sweb-c7d4d9d4.base.{self.arch}:latest"
 
     @property
     def env_image_key(self):
@@ -75,16 +75,16 @@ class TestSpec:
         hash_object.update(str(self.env_script_list).encode("utf-8"))
         hash_value = hash_object.hexdigest()
         val = hash_value[:22]  # 22 characters is still very likely to be unique
-        return f"sweb.env.{self.arch}.{val}:latest"
+        return f"ghcr.io/epoch-research/sweb-c7d4d9d4.env.{self.arch}.{val}:latest"
 
     @property
     def instance_image_key(self):
-        return f"sweb.eval.{self.arch}.{self.instance_id}:latest"
+        return f"ghcr.io/epoch-research/sweb-c7d4d9d4.eval.{self.arch}.{self.instance_id}:latest"
 
     def get_instance_container_name(self, run_id=None):
         if not run_id:
-            return f"sweb.eval.{self.instance_id}"
-        return f"sweb.eval.{self.instance_id}.{run_id}"
+            return f"ghcr.io/epoch-research/sweb-c7d4d9d4.eval.{self.instance_id}"
+        return f"ghcr.io/epoch-research/sweb-c7d4d9d4.eval.{self.instance_id}.{run_id}"
 
     @property
     def base_dockerfile(self):

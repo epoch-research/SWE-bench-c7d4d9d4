@@ -33,7 +33,7 @@ RUN conda config --append channels conda-forge
 RUN adduser --disabled-password --gecos 'dog' nonroot
 """
 
-_DOCKERFILE_ENV = r"""FROM --platform={platform} sweb.base.{arch}:latest
+_DOCKERFILE_ENV = r"""FROM --platform={platform} ghcr.io/epoch-research/sweb-c7d4d9d4.base.{arch}:latest
 
 COPY ./setup_env.sh /root/
 RUN chmod +x /root/setup_env.sh
