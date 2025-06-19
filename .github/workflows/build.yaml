@@ -18,6 +18,7 @@ jobs:
     # The script will detect the architecture and build the images for that architecture
     runs-on: epoch-research-${{ inputs.architecture }}-64core-256GB-2040GB
     strategy:
+      fail-fast: false
       matrix:
         repo:
           - 'astropy/astropy'
