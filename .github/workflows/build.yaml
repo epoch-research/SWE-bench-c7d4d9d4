@@ -16,7 +16,7 @@ on:
 jobs:
   build:
     # The script will detect the architecture and build the images for that architecture
-    runs-on: epoch-research-${{ inputs.architecture }}-32core-128GB-1200GB
+    runs-on: epoch-research-${{ inputs.architecture }}-64core-256GB-2040GB
     defaults:
       run:
         shell: bash -l {0}
