@@ -146,9 +146,9 @@ def build_image(
                     chunk["errorDetail"]["message"], buildlog
                 )
         logger.info("Image built successfully!")
-        logger.info(f"Pushing image {image_name}")
+        print(f"Pushing image {image_name}")
         client.images.push(image_name)
-        logger.info(f"Image {image_name} pushed successfully!")
+        print(f"Image {image_name} pushed successfully!")
     except docker.errors.BuildError as e:
         logger.error(f"docker.errors.BuildError during {image_name}: {e}")
         raise BuildImageError(image_name, str(e), logger) from e
