@@ -3,7 +3,7 @@ import datasets
 import argparse
 
 to_build = [
-   "django__django-13371",
+"django__django-13371",
 "django__django-13410",
 "django__django-13413",
 "django__django-13417",
@@ -90,16 +90,12 @@ to_build = [
 "matplotlib__matplotlib-22711",
 "matplotlib__matplotlib-22871",
 "matplotlib__matplotlib-22926",
-"matplotlib__matplotlib-22929",
-"matplotlib__matplotlib-22945",
-"matplotlib__matplotlib-23049",
 "matplotlib__matplotlib-23088",
 "matplotlib__matplotlib-23111",
 "matplotlib__matplotlib-23266",
 "matplotlib__matplotlib-23913",
 "matplotlib__matplotlib-24189",
 "matplotlib__matplotlib-24224",
-"matplotlib__matplotlib-24362",
 "matplotlib__matplotlib-24971",
 "matplotlib__matplotlib-25027",
 "matplotlib__matplotlib-25052",
