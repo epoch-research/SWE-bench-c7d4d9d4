@@ -153,16 +153,19 @@ def build(dataset_name, repo, limit=None):
     if limit:
         instance_ids = instance_ids[:limit]
 
-    print(f"Building images for {len(instance_ids)} instances for repo: {repo or 'all repos'}")
+    if instance_ids:
+        print(f"Building images for {len(instance_ids)} instances for repo: {repo or 'all repos'}")
 
-    prepare_images.main(
-        dataset_name=dataset_name,
-        split=split,
-        instance_ids=instance_ids,
-        max_workers=64,
-        force_rebuild=False,
-        open_file_limit=8192,
-    )
+        prepare_images.main(
+            dataset_name=dataset_name,
+            split=split,
+            instance_ids=instance_ids,
+            max_workers=64,
+            force_rebuild=False,
+            open_file_limit=8192,
+        )
+    else:
+        print(f"No instances to build for repo: {repo or 'all repos'}")
 
 
 if __name__ == '__main__':
