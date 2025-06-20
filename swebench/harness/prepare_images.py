@@ -69,7 +69,7 @@ def main(
     # Set open file limit
     resource.setrlimit(resource.RLIMIT_NOFILE, (open_file_limit, open_file_limit))
     client = docker.from_env(
-        timeout=600,
+        timeout=60 * 20,
 
     )
 
