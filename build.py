@@ -150,7 +150,7 @@ def build(dataset_name, repo, limit=None):
     
     instance_ids = [x for x in instance_ids if x in to_build]
 
-    if limit:
+    if limit and limit != -1:
         instance_ids = instance_ids[:limit]
 
     if instance_ids:

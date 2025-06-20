@@ -12,7 +12,12 @@ on:
         type: choice
         options:
           - x64
-          - arm64
+          - arm64 
+      limit:
+        description: 'Limit number of instances to build'
+        required: false
+        type: number
+        default: -1
 jobs:
   build:
     # The script will detect the architecture and build the images for that architecture
@@ -55,7 +60,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Run build script
-        run: python build.py --repo "${{ matrix.repo }}"
+        run: python build.py --repo "${{ matrix.repo }}" --limit ${{ inputs.limit }}
       - name: Create sanitized repo name
         run: echo "SANITIZED_REPO=$(echo '${{ matrix.repo }}' | tr '/' '-')" >> $GITHUB_ENV
       - name: Store Docker build logs as artifact
